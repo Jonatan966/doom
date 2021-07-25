@@ -10,6 +10,31 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    color: #E1E1E6;
+    color: ${ctx => ctx.theme.colors.text.primary};
+  }
+
+  #root {
+    min-height: 100vh;
+    background: ${ctx => ctx.theme.colors.background};
+  }
+
+  button {
+    cursor: pointer;
+    transition: filter 0.25s;
+    border: none;
+
+    &:hover {
+      filter: brightness(0.85);
+    }
+
+    > * {
+      transition: transform 0.2s;
+    }
+
+    &:active {
+      > * {
+        transform: translateY(10%);
+      }
+    }
   }
 `
