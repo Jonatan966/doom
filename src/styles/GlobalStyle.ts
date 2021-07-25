@@ -37,4 +37,26 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: ${ctx => ctx.theme.colors.text.secondary};
+  border-radius: ${ctx => ctx.theme.effects.borderRadius};
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: ${ctx => ctx.theme.colors.box.primary};
+  border-radius: ${ctx => ctx.theme.effects.borderRadius};
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #335e99;
+}
 `
