@@ -1,19 +1,18 @@
 import styled from 'styled-components'
 
-export const Container = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`
+import { Box } from '../../styles/Box'
 
-export const Header = styled.header`
+export const Container = styled(Box)`
   display: flex;
   align-items: center;
 
-  h2 {
+  p {
     flex: 1;
     text-align: center;
+  }
 
+  button {
+    background: ${ctx => ctx.theme.colors.text.secondary};
     color: ${ctx => ctx.theme.colors.box.primary};
   }
 `

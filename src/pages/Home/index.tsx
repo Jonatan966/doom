@@ -1,4 +1,5 @@
 import { GoGear } from 'react-icons/go'
+import { useHistory } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
 import { Clock } from '../../components/Clock'
@@ -7,6 +8,8 @@ import { SoundExplorer } from '../../components/SoundExplorer'
 import { Container } from './styles'
 
 export function HomePage() {
+  const history = useHistory()
+
   return (
     <Container>
       <img
@@ -15,7 +18,7 @@ export function HomePage() {
       />
       <main>
         <header>
-          <Button>
+          <Button onClick={() => history.push('/config')}>
             <GoGear size={20} />
           </Button>
         </header>
