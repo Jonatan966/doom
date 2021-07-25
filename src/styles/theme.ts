@@ -15,5 +15,6 @@ export const AppTheme = {
       primary: '0px 0px 8px rgba(0, 0, 0, 0.25)',
       secondary: 'inset 0px 0px 8px rgba(0, 0, 0, 0.25)',
     },
+    borderRadius: '0.5rem',
   },
 }

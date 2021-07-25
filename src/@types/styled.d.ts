@@ -14,6 +14,7 @@ declare module 'styled-components' {
     }
     effects: {
       shadow: ThemeItem
+      borderRadius: string
     }
   }
 }
