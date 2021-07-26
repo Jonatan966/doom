@@ -14,11 +14,11 @@ export function Clock() {
   useEffect(() => {
     function handleSetCurrentTime() {
       const currentDatetime = new Date()
-
-      setCurrentTimeAngles({
-        hour: currentDatetime.getHours() * 15,
+      const newTimeAngle = {
+        hour: (currentDatetime.getHours() % 12) * 29,
         minute: currentDatetime.getMinutes() * 6,
-      })
+      }
+      setCurrentTimeAngles(newTimeAngle)
     }
 
     handleSetCurrentTime()
