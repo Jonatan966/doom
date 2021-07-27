@@ -9,8 +9,8 @@ export const api = {
    * The function below can accessed using `window.Main.sayHello`
    */
 
-  sendMessage: (message: string) => { 
-    ipcRenderer.send('message', message)
+  sendMessage: (channel: string, message?: any) => {
+    ipcRenderer.send(channel, message)
   },
 
   /**
@@ -18,7 +18,15 @@ export const api = {
    */
   on: (channel: string, callback: Function) => {
     ipcRenderer.on(channel, (_, data) => callback(data))
-  }
+  },
+
+  off: (channel: string, listener: any) => {
+    ipcRenderer.off(channel, listener)
+  },
+
+  once: (channel: string, callback: Function) => {
+    ipcRenderer.once(channel, (_, data) => callback(data))
+  },
 }
 
 contextBridge.exposeInMainWorld('Main', api)
