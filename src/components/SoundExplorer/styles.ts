@@ -4,6 +4,11 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  .delete-btn {
+    background: ${ctx => ctx.theme.colors.text.secondary};
+    color: ${ctx => ctx.theme.colors.box.primary};
+  }
 `
 
 export const Header = styled.header`

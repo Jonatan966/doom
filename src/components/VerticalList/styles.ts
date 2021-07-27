@@ -10,6 +10,7 @@ export const Container = styled(Box)`
   gap: 0.5rem;
 
   max-height: 18rem;
+  min-height: 18rem;
   overflow-y: auto;
 
   h2 {

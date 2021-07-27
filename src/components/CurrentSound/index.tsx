@@ -1,14 +1,26 @@
 import { MdMusicNote, MdBlock } from 'react-icons/md'
 
+import { usePlayer } from '../../contexts/playerContext'
+
 import { Button } from '../Button'
 import { Container } from './styles'
 
 export function CurrentSound() {
+  const { currentSound, loadingSound, stopCurrentSound } = usePlayer()
+
   return (
     <Container background="secondary" shadow="inner">
-      <MdMusicNote size={32} />
-      <h1>Som tal</h1>
-      <Button>
+      {loadingSound ? (
+        <h1>Carregando. . .</h1>
+      ) : currentSound ? (
+        <>
+          <MdMusicNote size={32} />
+          <h1>Tocando: {currentSound?.name}</h1>
+        </>
+      ) : (
+        <h1>Esperando</h1>
+      )}
+      <Button onClick={stopCurrentSound}>
         <MdBlock size={25} />
         <h2>Parar</h2>
       </Button>

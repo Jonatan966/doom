@@ -29,7 +29,7 @@ export function ConfigPage() {
           <header>
             <h2>Acervo</h2>
           </header>
-          <SoundExplorer />
+          <SoundExplorer ableToRemoveItem />
           <PileController />
         </article>
 

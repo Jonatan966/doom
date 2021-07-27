@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { GoGear } from 'react-icons/go'
 import { useHistory } from 'react-router-dom'
 
@@ -9,6 +10,13 @@ import { Container } from './styles'
 
 export function HomePage() {
   const history = useHistory()
+
+  useEffect(() => {
+    window.Main.sendMessage('sound-list')
+
+    const teste = console.log
+    window.Main.once('retrieve-sound-list', teste)
+  }, [])
 
   return (
     <Container>
@@ -23,7 +31,7 @@ export function HomePage() {
           </Button>
         </header>
         <Clock />
-        <SoundExplorer />
+        <SoundExplorer ableToPlaySound />
         <CurrentSound />
       </main>
     </Container>

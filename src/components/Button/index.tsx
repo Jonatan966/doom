@@ -1,10 +1,16 @@
-import { ReactNode } from 'react'
+import { ReactNode, HTMLAttributes, DetailedHTMLProps } from 'react'
 
 import { Container } from './styles'
 
-type ButtonProps = {
+interface ButtonProps
+  extends Pick<
+    DetailedHTMLProps<
+      HTMLAttributes<HTMLDivElement & HTMLButtonElement>,
+      HTMLDivElement & HTMLButtonElement
+    >,
+    'onClick' | 'className'
+  > {
   children: ReactNode
-  onClick?: () => void
 }
 
 export function Button(props: ButtonProps) {
