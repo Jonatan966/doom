@@ -47,7 +47,9 @@ export const CalendarDate = styled.button`
   font-weight: bold;
   color: ${ctx => ctx.theme.colors.box.primary};
 
-  &.selected {
+  min-height: 2.625rem;
+
+  &:not(:disabled).selected {
     background: ${ctx => ctx.theme.colors.text.secondary};
     border: 3px solid ${ctx => ctx.theme.colors.background};
   }
