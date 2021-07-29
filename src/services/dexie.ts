@@ -1,20 +1,5 @@
 import Dexie from 'dexie'
-
-interface Trigger {
-  id?: number
-  weekDay: string
-  time: string
-  scheduleId: number
-}
-
-interface Schedule {
-  id?: number
-  mode: 'only-once' | 'daily' | 'monthly' | 'annualy'
-  sound: string
-  reproductions: number
-  targetDate: string
-  targetTime: string
-}
+import { Schedule, Trigger } from '../@types/schedule'
 
 class AppDatabase extends Dexie {
   schedules: Dexie.Table<Schedule, number>
