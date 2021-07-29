@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { Calendar } from '../../components/Calendar'
 import { PileController } from '../../components/PileController'
-import { ProgrammingCard } from '../../components/ProgrammingCard'
+import { ScheduleCard } from '../../components/ScheduleCard'
 import { SoundExplorer } from '../../components/SoundExplorer'
 import { VerticalList } from '../../components/VerticalList'
 
@@ -45,9 +45,9 @@ export function ConfigPage() {
           <section className="h-flex">
             <Calendar />
             <VerticalList>
-              <ProgrammingCard />
-              <ProgrammingCard />
-              <ProgrammingCard />
+              <ScheduleCard />
+              <ScheduleCard />
+              <ScheduleCard />
             </VerticalList>
           </section>
         </article>
