@@ -4,13 +4,14 @@ import { Button } from '../Button'
 
 import { Container } from './styles'
 
-type Option = {
+export type Option = {
   id: string
   children: ReactNode
 }
 
 interface SelectorInputProps {
   options: Option[]
+  onChange?: (selectedOption: Option) => void
 }
 
 interface SelectorOptionProps {
@@ -29,7 +30,7 @@ export function SelectorOption({
   )
 }
 
-export function SelectorInput({ options = [] }: SelectorInputProps) {
+export function SelectorInput({ options = [], onChange }: SelectorInputProps) {
   const [isOpened, setIsOpened] = useState(false)
   const [selectedOption, setSelectedOption] = useState<Option | null>(
     options.length ? options[0] : null
@@ -41,7 +42,13 @@ export function SelectorInput({ options = [] }: SelectorInputProps) {
   )
 
   function handleSelectOption(id: string) {
-    setSelectedOption(options.find(option => option.id === id) || null)
+    const newSelection = options.find(option => option.id === id) || null
+
+    if (newSelection && onChange) {
+      onChange(newSelection)
+    }
+
+    setSelectedOption(newSelection)
     toggleOpenState()
   }
 
