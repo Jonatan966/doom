@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     transition: filter 0.25s;
     border: none;
 
-    &:hover {
+    &:not(:disabled):hover {
       filter: brightness(0.85);
     }
 
@@ -35,6 +35,13 @@ export const GlobalStyle = createGlobalStyle`
       > * {
         transform: translateY(10%);
       }
+    }
+
+    &:disabled {
+      /* background: gray;
+      color: #333333; */
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 
