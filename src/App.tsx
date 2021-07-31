@@ -8,6 +8,7 @@ import { AppTheme } from './styles/theme'
 import { HomePage } from './pages/Home'
 import { ConfigPage } from './pages/Config'
 import { PlayerProvider } from './contexts/playerContext'
+import { ScheduleProvider } from './contexts/scheduleContext'
 
 export function App() {
   return (
@@ -17,8 +18,10 @@ export function App() {
         <HashRouter>
           <Switch>
             <Route exact path="/" component={SplashPage} />
-            <Route exact path="/home" component={HomePage} />
-            <Route exact path="/config" component={ConfigPage} />
+            <ScheduleProvider>
+              <Route exact path="/home" component={HomePage} />
+              <Route exact path="/config" component={ConfigPage} />
+            </ScheduleProvider>
           </Switch>
         </HashRouter>
       </ThemeProvider>
