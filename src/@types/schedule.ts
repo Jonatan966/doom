@@ -1,6 +1,6 @@
 export interface Trigger {
   id?: number
-  weekDay: string
+  weekDay: number
   time: string
   scheduleId: number
 }
@@ -11,5 +11,5 @@ export interface Schedule {
   sound: string
   reproductions: number
   targetDate: string
-  targetTime: string
+  targetTime?: string
 }
