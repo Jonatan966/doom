@@ -22,7 +22,7 @@ export const Container = styled(Box)`
     justify-content: center;
     align-self: stretch;
 
-    padding: 0 0.75rem;
+    padding: 0.75rem;
     background: ${ctx => ctx.theme.colors.box.primary};
 
     border-radius: ${ctx => ctx.theme.effects.borderRadius};
@@ -49,6 +49,8 @@ export const Container = styled(Box)`
     border-top-right-radius: 0;
 
     list-style: none;
+
+    z-index: 999;
 
     li {
       & + li {
