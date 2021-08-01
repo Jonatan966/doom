@@ -11,15 +11,21 @@ interface ButtonProps
     'onClick' | 'className'
   > {
   children: ReactNode
+  centeredText?: boolean
 }
 
-export function Button(props: ButtonProps) {
+export function Button({
+  className,
+  centeredText = false,
+  ...props
+}: ButtonProps) {
   return (
     <Container
       as="button"
       background="primary"
       shadow="outer"
       type="button"
+      className={`${className || ''} ${centeredText ? 'centered-txt' : ''}`}
       {...props}
     />
   )

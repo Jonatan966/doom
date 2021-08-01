@@ -7,9 +7,13 @@ export const Container = styled(Box)`
   gap: 0.5rem;
   align-items: center;
 
-  h1 {
-    flex: 1;
-  }
-
   padding: 0.75rem;
+
+  &.centered-txt {
+    h1,
+    h2,
+    h3 {
+      flex: 1;
+    }
+  }
 `
