@@ -45,6 +45,17 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .h-flex {
+    display: flex;
+    gap: 0.5rem;
+
+    > * {
+      flex: 1;
+      justify-content: center;
+      max-height: unset !important;
+    }
+  }
+
 ::-webkit-scrollbar {
   width: 0.5rem;
 }

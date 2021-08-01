@@ -45,17 +45,6 @@ export const Container = styled.div`
       & + article {
         margin-top: 1.25rem;
       }
-
-      .h-flex {
-        display: flex;
-        gap: 0.5rem;
-
-        > * {
-          flex: 1;
-          justify-content: center;
-          max-height: unset;
-        }
-      }
     }
   }
 `
