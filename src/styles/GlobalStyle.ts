@@ -11,6 +11,10 @@ export const GlobalStyle = createGlobalStyle`
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: ${ctx => ctx.theme.colors.text.primary};
+
+    &.overflow-hidden {
+      overflow: hidden;
+    }
   }
 
   #root {
