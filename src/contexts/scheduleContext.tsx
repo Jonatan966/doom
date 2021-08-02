@@ -28,7 +28,10 @@ export function ScheduleProvider({ children }: ScheduleProviderProps) {
       .filter(schedule => {
         switch (schedule.mode) {
           case 'monthly':
-          case 'annualy':
+            return (
+              schedule.targetDate === dayjs(targetDate).get('date').toString()
+            )
+          case 'annually':
             return schedule.targetDate === dayjs(targetDate).format('MM-DD')
           case 'only-once':
             return (

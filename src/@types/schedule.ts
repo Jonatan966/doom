@@ -7,7 +7,7 @@ export interface Trigger {
 
 export interface Schedule {
   id?: number
-  mode: 'only-once' | 'daily' | 'monthly' | 'annualy'
+  mode: 'only-once' | 'daily' | 'monthly' | 'annually'
   sound: string
   reproductions: number
   targetDate: string
