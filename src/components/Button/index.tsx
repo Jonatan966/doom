@@ -12,11 +12,13 @@ interface ButtonProps
   > {
   children: ReactNode
   centeredText?: boolean
+  type?: 'button' | 'submit'
 }
 
 export function Button({
   className,
   centeredText = false,
+  type = 'button',
   ...props
 }: ButtonProps) {
   return (
@@ -24,7 +26,7 @@ export function Button({
       as="button"
       background="primary"
       shadow="outer"
-      type="button"
+      type={type}
       className={`${className || ''} ${centeredText ? 'centered-txt' : ''}`}
       {...props}
     />
