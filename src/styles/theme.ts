@@ -5,10 +5,10 @@ export const AppTheme = {
       secondary: '#F1FAEE',
     },
     box: {
-      primary: '#1D3557',
-      secondary: '#A8DADC',
+      primary: '#4d350f',
+      secondary: '#efd7aa',
     },
-    background: '#457B9D',
+    background: '#92713d',
   },
   effects: {
     shadow: {
