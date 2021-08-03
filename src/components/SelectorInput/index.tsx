@@ -12,25 +12,30 @@ export type Option = {
 interface SelectorInputProps {
   options: Option[]
   onChange?: (selectedOption: Option) => void
+  children?: (selectOption: (option: Option) => void) => ReactNode
 }
 
 interface SelectorOptionProps {
   option: Option
-  onSelect?: (id: string) => void
+  onSelect?: (option: Option) => void
 }
 
 export function SelectorOption({
-  option: { id, children },
+  option,
   onSelect = () => null,
 }: SelectorOptionProps) {
   return (
     <li>
-      <Button onClick={() => onSelect(id)}>{children}</Button>
+      <Button onClick={() => onSelect(option)}>{option.children}</Button>
     </li>
   )
 }
 
-export function SelectorInput({ options = [], onChange }: SelectorInputProps) {
+export function SelectorInput({
+  options = [],
+  onChange,
+  children: customOptions,
+}: SelectorInputProps) {
   const [isOpened, setIsOpened] = useState(false)
   const [selectedOption, setSelectedOption] = useState<Option | null>(
     options.length ? options[0] : null
@@ -41,9 +46,7 @@ export function SelectorInput({ options = [], onChange }: SelectorInputProps) {
     option => option.id !== selectedOption?.id
   )
 
-  function handleSelectOption(id: string) {
-    const newSelection = options.find(option => option.id === id) || null
-
+  function handleSelectOption(newSelection: Option) {
     if (newSelection && onChange) {
       onChange(newSelection)
     }
@@ -68,15 +71,19 @@ export function SelectorInput({ options = [], onChange }: SelectorInputProps) {
         onClick={toggleOpenState}
       />
 
-      <ul className="options">
-        {filteresOptions.map(option => (
-          <SelectorOption
-            option={option}
-            onSelect={handleSelectOption}
-            key={option.id}
-          />
-        ))}
-      </ul>
+      {customOptions ? (
+        customOptions(handleSelectOption)
+      ) : (
+        <ul className="options">
+          {filteresOptions.map(option => (
+            <SelectorOption
+              option={option}
+              onSelect={handleSelectOption}
+              key={option.id}
+            />
+          ))}
+        </ul>
+      )}
     </Container>
   )
 }
