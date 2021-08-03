@@ -11,7 +11,7 @@ interface PlayerProviderProps {
   children: ReactNode
 }
 
-interface CurrentSound {
+export interface CurrentSound {
   path: string
   name: string
 }
