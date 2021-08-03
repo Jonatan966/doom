@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { AppModalStyles } from '../components/AppModal/styles'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -60,6 +61,8 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  ${AppModalStyles}
+  
 ::-webkit-scrollbar {
   width: 0.5rem;
 }
