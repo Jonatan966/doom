@@ -6,14 +6,10 @@ import {
   createContext,
   ReactNode,
 } from 'react'
+import { CurrentSound } from '../@types/currentSound'
 
 interface PlayerProviderProps {
   children: ReactNode
-}
-
-export interface CurrentSound {
-  path: string
-  name: string
 }
 
 interface PlayerContextProps {
