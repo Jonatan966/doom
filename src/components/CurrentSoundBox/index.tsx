@@ -5,7 +5,7 @@ import { usePlayer } from '../../contexts/playerContext'
 import { Button } from '../Button'
 import { Container } from './styles'
 
-export function CurrentSound() {
+export function CurrentSoundBox() {
   const { currentSound, loadingSound, stopCurrentSound } = usePlayer()
 
   return (
