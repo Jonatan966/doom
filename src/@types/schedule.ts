@@ -1,3 +1,5 @@
+import { CurrentSound } from './currentSound'
+
 export interface Trigger {
   id?: number
   weekDay: number
@@ -8,7 +10,7 @@ export interface Trigger {
 export interface Schedule {
   id?: number
   mode: 'only-once' | 'daily' | 'monthly' | 'annually'
-  sound: string
+  sound: CurrentSound
   reproductions: number
   targetDate: string
   targetTime?: string

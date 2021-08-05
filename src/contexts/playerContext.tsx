@@ -44,26 +44,46 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
     setCurrentSound(null)
   }
 
-  useEffect(() => {
-    function afterLoadSound(soundData: string) {
-      setLoadingSound(false)
+  function onSoundEnded() {
+    setCurrentSound(currentSound => {
+      if (!currentSound) return null
 
-      if (!audioRef.current) {
-        return
+      const formattedCurrentSound = {
+        ...currentSound,
+        reproductions: (currentSound.reproductions || 1) - 1,
       }
 
-      audioRef.current.src = soundData
-      audioRef.current.onended = () => setCurrentSound(null)
+      if (formattedCurrentSound.reproductions === 0) return null
+
+      playSound(formattedCurrentSound)
+
+      return formattedCurrentSound
+    })
+  }
+
+  useEffect(() => {
+    function playLoadedSound() {
+      if (!audioRef.current) return
+
       audioRef.current.play().catch(() => {
         alert('Não foi possível tocar esse som')
         setCurrentSound(null)
 
-        if (!audioRef.current) {
-          return
-        }
+        if (!audioRef.current) return
 
         audioRef.current.src = ''
       })
+    }
+
+    function afterLoadSound(soundData: string) {
+      setLoadingSound(false)
+
+      if (!audioRef.current) return
+
+      audioRef.current.src = soundData
+      audioRef.current.onended = onSoundEnded
+
+      setTimeout(() => playLoadedSound, 500)
     }
 
     window.Main.on('loaded-sound', afterLoadSound)

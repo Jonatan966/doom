@@ -1,8 +1,15 @@
-import { useContext, ReactNode, createContext } from 'react'
+import {
+  useContext,
+  ReactNode,
+  createContext,
+  useEffect,
+  useState,
+} from 'react'
 import dayjs from 'dayjs'
 
 import { Schedule, Trigger } from '../@types/schedule'
 import { database } from '../services/dexie'
+import { usePlayer } from './playerContext'
 
 interface ScheduleProviderProps {
   children: ReactNode
@@ -21,6 +28,9 @@ interface ScheduleContextProps {
 export const ScheduleContext = createContext({} as ScheduleContextProps)
 
 export function ScheduleProvider({ children }: ScheduleProviderProps) {
+  const { playSound, currentSound } = usePlayer()
+  const [, setIsExecutingSchedule] = useState(false)
+
   async function loadSchedulesByDate(
     targetDate: Date
   ): Promise<FormattedSchedule[]> {
@@ -113,6 +123,56 @@ export function ScheduleProvider({ children }: ScheduleProviderProps) {
 
     return true
   }
+
+  const checkIsExecutingSchedule = () =>
+    new Promise(resolve => {
+      setIsExecutingSchedule(old => {
+        resolve(old)
+        return old
+      })
+    })
+
+  useEffect(() => {
+    async function checkSchedules() {
+      if (await checkIsExecutingSchedule()) return
+
+      const currentDatetime = dayjs()
+      const currentTime = currentDatetime.format('HH:mm')
+
+      const currentSchedules = await loadSchedulesByDate(
+        currentDatetime.toDate()
+      )
+
+      const targetSchedule = currentSchedules.find(
+        schedule => schedule.targetTime === currentTime
+      )
+
+      if (!targetSchedule) {
+        return
+      }
+
+      playSound({
+        ...targetSchedule.sound,
+        reproductions: targetSchedule.reproductions,
+      })
+
+      setIsExecutingSchedule(true)
+
+      if (targetSchedule.mode === 'only-once') {
+        await database.schedules.delete(targetSchedule.id || -1)
+      }
+    }
+
+    const intervalId = setInterval(checkSchedules, 1000)
+
+    return () => clearInterval(intervalId)
+  }, [])
+
+  useEffect(() => {
+    if (!currentSound) {
+      setIsExecutingSchedule(false)
+    }
+  }, [currentSound])
 
   // async function updateSchedule() {}
 
