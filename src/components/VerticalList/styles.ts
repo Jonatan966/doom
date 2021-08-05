@@ -9,11 +9,15 @@ export const Container = styled(Box)`
 
   gap: 0.5rem;
 
-  max-height: 18rem;
+  max-height: 23.75rem;
   min-height: 18rem;
   overflow-y: auto;
 
   h2 {
     flex: 1;
+  }
+
+  h3 {
+    padding: 0.6rem;
   }
 `

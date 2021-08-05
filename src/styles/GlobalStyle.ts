@@ -57,7 +57,6 @@ export const GlobalStyle = createGlobalStyle`
     > * {
       flex: 1;
       justify-content: center;
-      max-height: unset !important;
     }
   }
 
