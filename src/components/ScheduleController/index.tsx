@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { FaRegCalendarTimes } from 'react-icons/fa'
+import { MdAdd } from 'react-icons/md'
 
 import { Calendar } from '../Calendar'
 import { ScheduleCard } from '../ScheduleCard'
 import { VerticalList } from '../VerticalList'
+import { Button } from '../Button'
 
 import { FormattedSchedule, useSchedule } from '../../contexts/scheduleContext'
 import { NotFoundMessage } from './styles'
@@ -14,6 +16,8 @@ export function ScheduleController() {
     FormattedSchedule[]
   >([])
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [isScheduleManagerModalOpen, setIsScheduleManagerModalOpen] =
+    useState(false)
   const { loadSchedulesByDate } = useSchedule()
 
   async function handleSelectDate(newDate: Date) {
@@ -27,9 +31,17 @@ export function ScheduleController() {
     <article>
       <header>
         <h2>Programação</h2>
+        <Button onClick={() => setIsScheduleManagerModalOpen(true)}>
+          <MdAdd size={25} color="lightgreen" />
+          <h2>Adicionar</h2>
+        </Button>
         <ScheduleManagerModal
           selectedDate={selectedDate}
-          onClose={() => handleSelectDate(selectedDate)}
+          onRequestClose={() => {
+            handleSelectDate(selectedDate)
+            setIsScheduleManagerModalOpen(false)
+          }}
+          isOpen={isScheduleManagerModalOpen}
         />
       </header>
 

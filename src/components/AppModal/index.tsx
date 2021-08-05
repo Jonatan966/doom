@@ -22,7 +22,6 @@ export function AppModal({
   }
 
   function onModalClose() {
-    if (onRequestClose) onRequestClose()
     document.body.classList.remove('overflow-hidden')
   }
 
@@ -30,7 +29,8 @@ export function AppModal({
     <Modal
       isOpen={isOpen}
       onAfterOpen={onModalOpen}
-      onRequestClose={onModalClose}
+      onRequestClose={onRequestClose}
+      onAfterClose={onModalClose}
       overlayClassName="app-modal-overlay"
       className="app-modal-content"
       children={children}
