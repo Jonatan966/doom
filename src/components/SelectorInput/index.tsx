@@ -6,6 +6,7 @@ import { Container } from './styles'
 
 export type Option = {
   id: string
+  aditional?: any
   children: ReactNode
 }
 
