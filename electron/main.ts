@@ -39,9 +39,10 @@ async function registerListeners() {
     mainWindow?.webContents.send('finish-check-resources', checkResources())
   })
 
-  ipcMain.on('sound-list', (_, path) => {
-    const soundList = listSounds(path)
-    mainWindow?.webContents.send('retrieve-sound-list', soundList)
+  ipcMain.on('sound-list', (event, path) => {
+    listSounds(path).then(soundList =>
+      event.sender.send('retrieve-sound-list', soundList)
+    )
   })
 
   ipcMain.on('load-sound', (event, soundPath) => {
