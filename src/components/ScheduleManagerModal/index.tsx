@@ -7,8 +7,11 @@ import { Button } from '../Button'
 import { SelectorInput } from '../SelectorInput'
 import { SoundExplorer } from '../SoundExplorer'
 import { TextInput } from '../TextInput'
-import { BoxContainer } from './styles'
 import { FormattedSchedule, useSchedule } from '../../contexts/scheduleContext'
+
+import { BoxContainer } from './styles'
+
+import { CurrentSound } from '../../@types/currentSound'
 
 interface ScheduleManagerModalProps extends AppModalConfig {
   selectedDate: Date
@@ -26,7 +29,7 @@ export function ScheduleManagerModal({
   )
   const [currentTime, setCurrentTime] = useState(dayjs().format('HH:mm'))
   const [mode, setMode] = useState<FormattedSchedule['mode']>('only-once')
-  const [soundPath, setSoundPath] = useState('')
+  const [sound, setSound] = useState<CurrentSound>()
   const [reproductions, setReproductions] = useState(1)
 
   async function handleAddSchedule(event: FormEvent) {
@@ -42,15 +45,19 @@ export function ScheduleManagerModal({
       formattedDate = dayjs(currentDate).get('date').toString()
     }
 
+    if (!sound) {
+      return
+    }
+
     await addSchedule({
       mode,
       reproductions,
-      sound: soundPath,
+      sound,
       targetDate: formattedDate,
       targetTime: currentTime,
     })
 
-    // closeModal()
+    onRequestClose()
   }
 
   return (
@@ -111,7 +118,7 @@ export function ScheduleManagerModal({
               <section>
                 <h3>Som</h3>
                 <SelectorInput
-                  onChange={newSound => setSoundPath(newSound.id)}
+                  onChange={newSound => setSound(newSound.aditional)}
                   options={[
                     {
                       id: '-1',
@@ -125,6 +132,7 @@ export function ScheduleManagerModal({
                       onSelect={currentSound =>
                         selectOption({
                           id: currentSound.path,
+                          aditional: currentSound,
                           children: <strong>{currentSound.name}</strong>,
                         })
                       }

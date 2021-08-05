@@ -26,15 +26,12 @@ export function ScheduleCard({ schedule }: ScheduleCardProps) {
   )
 
   const ScheduleModeIcon = ScheduleModeIcons[schedule.mode]
-  const formattedSoundName = schedule.sound.substring(
-    schedule.sound.lastIndexOf('/') + 1
-  )
 
   return (
     <Container shadow="outer" background="primary">
       <ScheduleModeIcon size={25} color="white" />
       <p>
-        Tocar <strong>{formattedSoundName || 'Sem nome'}</strong> <br />
+        Tocar <strong>{schedule.sound.name || 'Sem nome'}</strong> <br />
         às <strong>{formattedTime} hrs</strong>
       </p>
       <Button>
