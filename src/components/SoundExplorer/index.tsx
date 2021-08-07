@@ -12,7 +12,7 @@ import { Container, ExplorerItemCardContainer, Header } from './styles'
 
 interface SoundExplorerProps {
   ableToPlaySound?: boolean
-  ableToRemoveItem?: boolean
+  onRequestRemove?: (explorerItem: ExplorerItem) => void
   onSelect?: (currentSound: CurrentSound) => void
   onNavigate?: (path: string) => void
   className?: string
@@ -50,7 +50,7 @@ function ExplorerItemCard({
 
 export function SoundExplorer({
   ableToPlaySound,
-  ableToRemoveItem,
+  onRequestRemove,
   onSelect,
   onNavigate,
   className,
@@ -83,8 +83,6 @@ export function SoundExplorer({
 
     onNavigate?.(currentSoundPath)
   }
-
-  function handleRemoveExplorerItem(explorerItem: ExplorerItem) {}
 
   useEffect(loadSoundList, [currentSoundPath])
 
@@ -125,9 +123,7 @@ export function SoundExplorer({
             }}
             onNavigate={() => handleNavigateToFolder(explorerItem.path)}
             onRemove={
-              ableToRemoveItem
-                ? () => handleRemoveExplorerItem(explorerItem)
-                : undefined
+              onRequestRemove ? () => onRequestRemove(explorerItem) : undefined
             }
             {...explorerItem}
           />
