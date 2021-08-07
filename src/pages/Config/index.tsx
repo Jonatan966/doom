@@ -1,13 +1,9 @@
 import { GoArrowLeft } from 'react-icons/go'
-import { MdAdd } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
-import { Calendar } from '../../components/Calendar'
-import { PileController } from '../../components/PileController'
-import { ScheduleCard } from '../../components/ScheduleCard'
-import { SoundExplorer } from '../../components/SoundExplorer'
-import { VerticalList } from '../../components/VerticalList'
+import { PileManager } from '../../components/PileManager'
+import { ScheduleController } from '../../components/ScheduleController'
 
 import { Container } from './styles'
 
@@ -25,32 +21,9 @@ export function ConfigPage() {
       </header>
 
       <main>
-        <article>
-          <header>
-            <h2>Acervo</h2>
-          </header>
-          <SoundExplorer ableToRemoveItem />
-          <PileController />
-        </article>
+        <PileManager />
 
-        <article>
-          <header>
-            <h2>Programação</h2>
-            <Button>
-              <MdAdd size={25} color="lightgreen" />
-              <h2>Adicionar</h2>
-            </Button>
-          </header>
-
-          <section className="h-flex">
-            <Calendar />
-            <VerticalList>
-              <ScheduleCard />
-              <ScheduleCard />
-              <ScheduleCard />
-            </VerticalList>
-          </section>
-        </article>
+        <ScheduleController />
 
         <article>
           <header>
