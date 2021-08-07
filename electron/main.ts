@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 import { addFolder } from './events/addFolder'
 import { addSound } from './events/addSound'
 import { checkResources } from './events/checkResources'
+import { deleteExplorerItem } from './events/deleteExplorerItem'
 import { listSounds } from './events/listSounds'
 import { readSound } from './events/loadSound'
 
@@ -57,6 +58,12 @@ async function registerListeners() {
 
   ipcMain.on('add-folder', (event, folderPath) => {
     addFolder(folderPath).then(() => event.sender.send('success-add-folder'))
+  })
+
+  ipcMain.on('delete-explorer-item', (event, explorerItem) => {
+    deleteExplorerItem(explorerItem).then(success =>
+      event.sender.send('retrieve-delete-explorer-item', success)
+    )
   })
 }
 
