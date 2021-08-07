@@ -83,7 +83,7 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
       audioRef.current.src = soundData
       audioRef.current.onended = onSoundEnded
 
-      setTimeout(() => playLoadedSound, 500)
+      setTimeout(playLoadedSound, 500)
     }
 
     window.Main.on('loaded-sound', afterLoadSound)
