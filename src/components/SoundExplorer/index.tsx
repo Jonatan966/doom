@@ -65,7 +65,10 @@ export function SoundExplorer({
   }
 
   function handleNavigateToFolder(folder: string) {
-    setCurrentSoundPath(`/${folder}`)
+    const filteredFolder = `/${folder}`
+      .replace(/(\\)/g, '/')
+      .replace(/(\/\/)/g, '/')
+    setCurrentSoundPath(filteredFolder)
   }
 
   function handleBackPath() {
@@ -107,7 +110,7 @@ export function SoundExplorer({
             key={explorerItem.name}
             onSelect={() => {
               const currentSound = {
-                path: `${currentSoundPath}/${explorerItem.name}`,
+                path: explorerItem.path,
                 name: explorerItem.name,
               }
 
@@ -120,7 +123,7 @@ export function SoundExplorer({
 
               onSelect(currentSound)
             }}
-            onNavigate={() => handleNavigateToFolder(explorerItem.name)}
+            onNavigate={() => handleNavigateToFolder(explorerItem.path)}
             onRemove={
               ableToRemoveItem
                 ? () => handleRemoveExplorerItem(explorerItem)
