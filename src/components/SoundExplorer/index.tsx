@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { GoTrashcan } from 'react-icons/go'
 
 import { MdMusicNote, MdFolder } from 'react-icons/md'
+import { CurrentSound } from '../../@types/currentSound'
 import { ExplorerItem } from '../../@types/explorerItem'
-import { CurrentSound, usePlayer } from '../../contexts/playerContext'
+import { usePlayer } from '../../contexts/playerContext'
 
 import { Button } from '../Button'
 import { VerticalList } from '../VerticalList'
@@ -13,7 +14,9 @@ interface SoundExplorerProps {
   ableToPlaySound?: boolean
   ableToRemoveItem?: boolean
   onSelect?: (currentSound: CurrentSound) => void
+  onNavigate?: (path: string) => void
   className?: string
+  reloadPathTrigger?: number
 }
 
 interface ExplorerItemCardProps extends ExplorerItem {
@@ -49,7 +52,9 @@ export function SoundExplorer({
   ableToPlaySound,
   ableToRemoveItem,
   onSelect,
+  onNavigate,
   className,
+  reloadPathTrigger = 0,
 }: SoundExplorerProps) {
   const [currentSoundPath, setCurrentSoundPath] = useState('/')
   const [soundList, setSoundList] = useState<ExplorerItem[]>([])
@@ -69,12 +74,22 @@ export function SoundExplorer({
     )
   }
 
-  function handleRemoveExplorerItem(explorerItem: ExplorerItem) {}
-
-  useEffect(() => {
+  function loadSoundList() {
     window.Main.sendMessage('sound-list', currentSoundPath)
     window.Main.once('retrieve-sound-list', handleRetrieveSounds)
-  }, [currentSoundPath])
+
+    onNavigate?.(currentSoundPath)
+  }
+
+  function handleRemoveExplorerItem(explorerItem: ExplorerItem) {}
+
+  useEffect(loadSoundList, [currentSoundPath])
+
+  useEffect(() => {
+    if (!reloadPathTrigger) return
+
+    loadSoundList()
+  }, [reloadPathTrigger])
 
   return (
     <Container className={className || ''}>
