@@ -1,4 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
+import { addFolder } from './events/addFolder'
+import { addSound } from './events/addSound'
 import { checkResources } from './events/checkResources'
 import { listSounds } from './events/listSounds'
 import { readSound } from './events/loadSound'
@@ -47,6 +49,14 @@ async function registerListeners() {
 
   ipcMain.on('load-sound', (event, soundPath) => {
     readSound(soundPath).then(url => event.sender.send('loaded-sound', url))
+  })
+
+  ipcMain.on('add-sound', (event, soundData) => {
+    addSound(soundData).then(() => event.sender.send('success-add-sound'))
+  })
+
+  ipcMain.on('add-folder', (event, folderPath) => {
+    addFolder(folderPath).then(() => event.sender.send('success-add-folder'))
   })
 }
 
