@@ -6,6 +6,8 @@ import {
   createContext,
   ReactNode,
 } from 'react'
+import { toast } from 'react-hot-toast'
+
 import { CurrentSound } from '../@types/currentSound'
 
 interface PlayerProviderProps {
@@ -66,7 +68,7 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
       if (!audioRef.current) return
 
       audioRef.current.play().catch(() => {
-        alert('Não foi possível tocar esse som')
+        toast.error('Não foi possível tocar esse som')
         setCurrentSound(null)
 
         if (!audioRef.current) return

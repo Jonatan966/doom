@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'styled-components'
 import { HashRouter, Route, Switch } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
 import { SplashPage } from './pages/Splash'
 
@@ -15,6 +16,7 @@ export function App() {
     <PlayerProvider>
       <ThemeProvider theme={AppTheme}>
         <GlobalStyle />
+        <Toaster />
         <HashRouter>
           <Switch>
             <Route exact path="/" component={SplashPage} />

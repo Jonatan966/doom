@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MdAdd, MdFolder, MdMusicNote } from 'react-icons/md'
+import { toast } from 'react-hot-toast'
 
 import { Button } from '../Button'
 import { FileSelectorInput } from '../FileSelectorInput'
@@ -56,7 +57,7 @@ export function PileController({
     }
 
     window.Main.once('success-add-sound', () => {
-      alert('Som adicionado com sucesso!')
+      toast.success('Som adicionado com sucesso!')
 
       handleAfterAdd()
     })
