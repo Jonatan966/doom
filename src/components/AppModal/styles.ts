@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const AppModalStyles = css`
   .app-modal-overlay {
@@ -24,5 +24,23 @@ export const AppModalStyles = css`
 
     padding: 1rem;
     border-radius: ${ctx => ctx.theme.effects.borderRadius};
+  }
+`
+
+export const AppModalBoxContainer = styled.div`
+  header {
+    display: flex;
+
+    h2 {
+      margin: auto;
+    }
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    margin: 1.5rem 0;
   }
 `
