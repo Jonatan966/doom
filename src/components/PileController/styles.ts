@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { Container as FileSelectorInputContainer } from '../FileSelectorInput/styles'
 import { Box } from '../../styles/Box'
 
 export const Container = styled(Box)`
@@ -8,14 +9,7 @@ export const Container = styled(Box)`
 
   margin-top: 0.5rem;
 
-  input {
+  ${FileSelectorInputContainer} {
     flex: 1;
-    border-radius: ${ctx => ctx.theme.effects.borderRadius};
-    border: 2px solid ${ctx => ctx.theme.colors.box.primary};
-
-    padding: 0 1rem;
-    font-size: 1.5rem;
-    color: ${ctx => ctx.theme.colors.box.primary};
-    text-align: center;
   }
 `
