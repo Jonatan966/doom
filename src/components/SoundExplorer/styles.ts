@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { lighten, desaturate } from 'polished'
+
 import { Container as ButtonContainer } from '../Button/styles'
 
 export const Container = styled.section`
@@ -6,8 +8,8 @@ export const Container = styled.section`
   flex-direction: column;
 
   .delete-btn {
-    background: ${ctx => ctx.theme.colors.text.secondary};
-    color: red;
+    background: ${() => desaturate(0.35, 'red')};
+    color: ${ctx => ctx.theme.colors.text.secondary};
   }
 `
 
@@ -28,7 +30,7 @@ export const Header = styled.header`
 
 export const ExplorerItemCardContainer = styled.div`
   display: flex;
-  background: #5bbbbe;
+  background: ${ctx => lighten(0.2, ctx.theme.colors.box.primary)};
 
   border-radius: ${ctx => ctx.theme.effects.borderRadius};
 
